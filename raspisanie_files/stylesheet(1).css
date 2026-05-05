@@ -1,0 +1,35 @@
+@font-face {
+    font-family: 'Open Sans Condensed';
+    src: url('subset-OpenSansCondensed-LightItalic.eot');
+    src: local('Open Sans Condensed Light Italic'), local('OpenSansCondensed-LightItalic'),
+        url('subset-OpenSansCondensed-LightItalic.eot?#iefix') format('embedded-opentype'),
+        url('subset-OpenSansCondensed-LightItalic.woff2') format('woff2'),
+        url('subset-OpenSansCondensed-LightItalic.woff') format('woff'),
+        url('subset-OpenSansCondensed-LightItalic.ttf') format('truetype');
+    font-weight: 300;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Open Sans Condensed';
+    src: url('subset-OpenSansCondensed-Light.eot');
+    src: local('Open Sans Condensed Light'), local('OpenSansCondensed-Light'),
+        url('subset-OpenSansCondensed-Light.eot?#iefix') format('embedded-opentype'),
+        url('subset-OpenSansCondensed-Light.woff2') format('woff2'),
+        url('subset-OpenSansCondensed-Light.woff') format('woff'),
+        url('subset-OpenSansCondensed-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Open Sans Condensed';
+    src: url('subset-OpenSansCondensed-Bold.eot');
+    src: local('Open Sans Condensed Bold'), local('OpenSansCondensed-Bold'),
+        url('subset-OpenSansCondensed-Bold.eot?#iefix') format('embedded-opentype'),
+        url('subset-OpenSansCondensed-Bold.woff2') format('woff2'),
+        url('subset-OpenSansCondensed-Bold.woff') format('woff'),
+        url('subset-OpenSansCondensed-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}

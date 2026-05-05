@@ -1,0 +1,506 @@
+
+ul.uk-subnav li.uk-first-column {
+    list-style-type: none;
+    padding: 10px 20px;
+    transition: ease-in-out 0.5s;
+    width: 100%;
+}
+
+ul.uk-subnav li.uk-first-column a:hover {
+    text-decoration: none;
+}
+
+ul.uk-subnav li.uk-first-column:hover {
+    transform: translateY(-3px);
+    transition: ease-in-out 0.5s;
+    box-shadow: 0 10px 10px rgba(0, 61, 98, 0.2);
+}
+
+div.uk-first-column {
+    border-bottom: 2px solid rgba(0, 108, 183, 0.2);
+}
+
+div.uk-first-column ul.uk-subnav {
+    margin: 0;
+    padding: 10px 0 10px 40px;
+}
+
+.uk-first-column a {
+    color: #0f0f0f;
+}
+
+.tab-list1 input[type="checkbox"] {
+    display: none;
+}
+
+.tab-list1 > li:hover label {
+    /*transform: translateY(-3px);*/
+    transition: ease-in-out 0.5s;
+    box-shadow: 0 10px 10px rgb(14 99 174 / 10%);
+}
+
+.tab-list1 li label {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+    width: 100%;
+    background: white;
+    padding: 20px 20px 20px 15px;
+    border: 1px solid #0E63AE;
+    border-radius: 10px;
+    transition: ease-in-out 1s;
+    margin-top: 20px;
+    margin-bottom: 0;
+}
+
+.tab-list1 label span.rating {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    width: 85%;
+}
+
+.tab-list1 label span.rating span:first-child {
+    width: 700px;
+}
+
+.tab-list1 label span.rating span {
+    margin: 10px 20px 10px 0;
+    color: #0E63AE;
+}
+
+img.click {
+    transform: matrix(1, 0, 0, 1, 0, 0);
+    transition: ease-in-out 0.3s;
+}
+
+input#tab_1:checked ~ label[for="tab_1"],
+input#tab_2:checked ~ label[for="tab_2"],
+input#tab_3:checked ~ label[for="tab_3"],
+input#tab_4:checked ~ label[for="tab_4"],
+input#tab_5:checked ~ label[for="tab_5"],
+input#tab_6:checked ~ label[for="tab_6"],
+input#tab_7:checked ~ label[for="tab_7"],
+input#tab_8:checked ~ label[for="tab_8"],
+input#tab_9:checked ~ label[for="tab_9"],
+input#tab_10:checked ~ label[for="tab_10"],
+input#tab_11:checked ~ label[for="tab_11"],
+input#tab_12:checked ~ label[for="tab_12"],
+input#tab_13:checked ~ label[for="tab_13"],
+input#tab_14:checked ~ label[for="tab_14"],
+input#tab_15:checked ~ label[for="tab_15"],
+input#tab_16:checked ~ label[for="tab_16"],
+input#tab_17:checked ~ label[for="tab_17"],
+input#tab_18:checked ~ label[for="tab_18"],
+input#tab_19:checked ~ label[for="tab_19"],
+input#tab_20:checked ~ label[for="tab_20"],
+input#tab_21:checked ~ label[for="tab_21"],
+input#tab_22:checked ~ label[for="tab_22"],
+input#tab_23:checked ~ label[for="tab_23"],
+input#tab_24:checked ~ label[for="tab_24"],
+input#tab_25:checked ~ label[for="tab_25"],
+input#tab_26:checked ~ label[for="tab_26"],
+input#tab_27:checked ~ label[for="tab_27"],
+input#tab_28:checked ~ label[for="tab_28"],
+input#tab_29:checked ~ label[for="tab_29"],
+input#tab_30:checked ~ label[for="tab_30"],
+input#tab_31:checked ~ label[for="tab_31"],
+input#tab_32:checked ~ label[for="tab_32"],
+input#tab_33:checked ~ label[for="tab_33"],
+input#tab_34:checked ~ label[for="tab_34"],
+input#tab_35:checked ~ label[for="tab_35"],
+input#tab_36:checked ~ label[for="tab_36"],
+input#tab_37:checked ~ label[for="tab_37"],
+input#tab_38:checked ~ label[for="tab_38"],
+input#tab_39:checked ~ label[for="tab_39"],
+input#tab_40:checked ~ label[for="tab_40"],
+input#tab_41:checked ~ label[for="tab_41"],
+input#tab_42:checked ~ label[for="tab_42"],
+input#tab_43:checked ~ label[for="tab_43"],
+input#tab_44:checked ~ label[for="tab_44"],
+input#tab_45:checked ~ label[for="tab_45"],
+input#tab_46:checked ~ label[for="tab_46"],
+input#tab_47:checked ~ label[for="tab_47"],
+input#tab_48:checked ~ label[for="tab_48"],
+input#tab_49:checked ~ label[for="tab_49"],
+input#tab_50:checked ~ label[for="tab_50"],
+input#tab_51:checked ~ label[for="tab_51"],
+input#tab_52:checked ~ label[for="tab_52"],
+input#tab_53:checked ~ label[for="tab_53"],
+input#tab_54:checked ~ label[for="tab_54"],
+input#tab_55:checked ~ label[for="tab_55"],
+input#tab_56:checked ~ label[for="tab_56"],
+input#tab_57:checked ~ label[for="tab_57"],
+input#tab_58:checked ~ label[for="tab_58"],
+input#tab_59:checked ~ label[for="tab_59"],
+input#tab_60:checked ~ label[for="tab_60"],
+input#tab_61:checked ~ label[for="tab_61"],
+input#tab_62:checked ~ label[for="tab_62"],
+input#tab_63:checked ~ label[for="tab_63"],
+input#tab_64:checked ~ label[for="tab_64"],
+input#tab_65:checked ~ label[for="tab_65"],
+input#tab_66:checked ~ label[for="tab_66"],
+input#tab_67:checked ~ label[for="tab_67"],
+input#tab_68:checked ~ label[for="tab_68"],
+input#tab_69:checked ~ label[for="tab_69"],
+input#tab_70:checked ~ label[for="tab_70"],
+input#tab_71:checked ~ label[for="tab_71"],
+input#tab_72:checked ~ label[for="tab_72"],
+input#tab_73:checked ~ label[for="tab_73"],
+input#tab_74:checked ~ label[for="tab_74"],
+input#tab_75:checked ~ label[for="tab_75"],
+input#tab_76:checked ~ label[for="tab_76"],
+input#tab_77:checked ~ label[for="tab_77"],
+input#tab_78:checked ~ label[for="tab_78"],
+input#tab_79:checked ~ label[for="tab_79"],
+input#tab_80:checked ~ label[for="tab_80"],
+input#tab_81:checked ~ label[for="tab_81"],
+input#tab_82:checked ~ label[for="tab_82"],
+input#tab_83:checked ~ label[for="tab_83"],
+input#tab_84:checked ~ label[for="tab_84"],
+input#tab_85:checked ~ label[for="tab_85"],
+input#tab_86:checked ~ label[for="tab_86"],
+input#tab_87:checked ~ label[for="tab_87"],
+input#tab_88:checked ~ label[for="tab_88"],
+input#tab_89:checked ~ label[for="tab_89"],
+input#tab_90:checked ~ label[for="tab_90"],
+input#tab_91:checked ~ label[for="tab_91"],
+input#tab_92:checked ~ label[for="tab_92"],
+input#tab_93:checked ~ label[for="tab_93"],
+input#tab_94:checked ~ label[for="tab_94"],
+input#tab_95:checked ~ label[for="tab_95"],
+input#tab_96:checked ~ label[for="tab_96"],
+input#tab_97:checked ~ label[for="tab_97"],
+input#tab_98:checked ~ label[for="tab_98"],
+input#tab_99:checked ~ label[for="tab_99"],
+input#tab_100:checked ~ label[for="tab_100"] {
+    border-radius: 10px 10px 0 0;
+    box-shadow: 0 10px 10px rgba(0, 61, 98, 0.1);
+}
+
+input#tab_1:checked ~ label img.click_1,
+input#tab_2:checked ~ label img.click_2,
+input#tab_3:checked ~ label img.click_3,
+input#tab_4:checked ~ label img.click_4,
+input#tab_5:checked ~ label img.click_5,
+input#tab_6:checked ~ label img.click_6,
+input#tab_7:checked ~ label img.click_7,
+input#tab_8:checked ~ label img.click_8,
+input#tab_9:checked ~ label img.click_9,
+input#tab_10:checked ~ label img.click_10,
+input#tab_11:checked ~ label img.click_11,
+input#tab_12:checked ~ label img.click_12,
+input#tab_13:checked ~ label img.click_13,
+input#tab_14:checked ~ label img.click_14,
+input#tab_15:checked ~ label img.click_15,
+input#tab_16:checked ~ label img.click_16,
+input#tab_17:checked ~ label img.click_17,
+input#tab_18:checked ~ label img.click_18,
+input#tab_19:checked ~ label img.click_19,
+input#tab_20:checked ~ label img.click_20,
+input#tab_21:checked ~ label img.click_21,
+input#tab_22:checked ~ label img.click_22,
+input#tab_23:checked ~ label img.click_23,
+input#tab_24:checked ~ label img.click_24,
+input#tab_25:checked ~ label img.click_25,
+input#tab_26:checked ~ label img.click_26,
+input#tab_27:checked ~ label img.click_27,
+input#tab_28:checked ~ label img.click_28,
+input#tab_29:checked ~ label img.click_29,
+input#tab_30:checked ~ label img.click_30,
+input#tab_31:checked ~ label img.click_31,
+input#tab_32:checked ~ label img.click_32,
+input#tab_33:checked ~ label img.click_33,
+input#tab_34:checked ~ label img.click_34,
+input#tab_35:checked ~ label img.click_35,
+input#tab_36:checked ~ label img.click_36,
+input#tab_37:checked ~ label img.click_37,
+input#tab_38:checked ~ label img.click_38,
+input#tab_39:checked ~ label img.click_39,
+input#tab_40:checked ~ label img.click_40,
+input#tab_41:checked ~ label img.click_41,
+input#tab_42:checked ~ label img.click_42,
+input#tab_43:checked ~ label img.click_43,
+input#tab_44:checked ~ label img.click_44,
+input#tab_45:checked ~ label img.click_45,
+input#tab_46:checked ~ label img.click_46,
+input#tab_47:checked ~ label img.click_47,
+input#tab_48:checked ~ label img.click_48,
+input#tab_49:checked ~ label img.click_49,
+input#tab_50:checked ~ label img.click_50,
+input#tab_51:checked ~ label img.click_51,
+input#tab_52:checked ~ label img.click_52,
+input#tab_53:checked ~ label img.click_53,
+input#tab_54:checked ~ label img.click_54,
+input#tab_55:checked ~ label img.click_55,
+input#tab_56:checked ~ label img.click_56,
+input#tab_57:checked ~ label img.click_57,
+input#tab_58:checked ~ label img.click_58,
+input#tab_59:checked ~ label img.click_59,
+input#tab_60:checked ~ label img.click_60,
+input#tab_61:checked ~ label img.click_61,
+input#tab_62:checked ~ label img.click_62,
+input#tab_63:checked ~ label img.click_63,
+input#tab_64:checked ~ label img.click_64,
+input#tab_65:checked ~ label img.click_65,
+input#tab_66:checked ~ label img.click_66,
+input#tab_67:checked ~ label img.click_67,
+input#tab_68:checked ~ label img.click_68,
+input#tab_69:checked ~ label img.click_69,
+input#tab_70:checked ~ label img.click_70,
+input#tab_71:checked ~ label img.click_71,
+input#tab_72:checked ~ label img.click_72,
+input#tab_73:checked ~ label img.click_73,
+input#tab_74:checked ~ label img.click_74,
+input#tab_75:checked ~ label img.click_75,
+input#tab_76:checked ~ label img.click_76,
+input#tab_77:checked ~ label img.click_77,
+input#tab_78:checked ~ label img.click_78,
+input#tab_79:checked ~ label img.click_79,
+input#tab_80:checked ~ label img.click_80,
+input#tab_81:checked ~ label img.click_81,
+input#tab_82:checked ~ label img.click_82,
+input#tab_83:checked ~ label img.click_83,
+input#tab_84:checked ~ label img.click_84,
+input#tab_85:checked ~ label img.click_85,
+input#tab_86:checked ~ label img.click_86,
+input#tab_87:checked ~ label img.click_87,
+input#tab_88:checked ~ label img.click_88,
+input#tab_89:checked ~ label img.click_89,
+input#tab_90:checked ~ label img.click_90,
+input#tab_91:checked ~ label img.click_91,
+input#tab_92:checked ~ label img.click_92,
+input#tab_93:checked ~ label img.click_93,
+input#tab_94:checked ~ label img.click_94,
+input#tab_95:checked ~ label img.click_95,
+input#tab_96:checked ~ label img.click_96,
+input#tab_97:checked ~ label img.click_97,
+input#tab_98:checked ~ label img.click_98,
+input#tab_99:checked ~ label img.click_99,
+input#tab_100:checked ~ label img.click_100 {
+    transform: rotate(180deg);
+    transition: ease-in-out 0.3s;
+}
+
+input#tab_1 ~ div#tab_1_content,
+input#tab_2 ~ div#tab_2_content,
+input#tab_3 ~ div#tab_3_content,
+input#tab_4 ~ div#tab_4_content,
+input#tab_5 ~ div#tab_5_content,
+input#tab_6 ~ div#tab_6_content,
+input#tab_7 ~ div#tab_7_content,
+input#tab_8 ~ div#tab_8_content,
+input#tab_9 ~ div#tab_9_content,
+input#tab_10 ~ div#tab_10_content,
+input#tab_11 ~ div#tab_11_content,
+input#tab_12 ~ div#tab_12_content,
+input#tab_13 ~ div#tab_13_content,
+input#tab_14 ~ div#tab_14_content,
+input#tab_15 ~ div#tab_15_content,
+input#tab_16 ~ div#tab_16_content,
+input#tab_17 ~ div#tab_17_content,
+input#tab_18 ~ div#tab_18_content,
+input#tab_19 ~ div#tab_19_content,
+input#tab_20 ~ div#tab_20_content,
+input#tab_21 ~ div#tab_21_content,
+input#tab_22 ~ div#tab_22_content,
+input#tab_23 ~ div#tab_23_content,
+input#tab_24 ~ div#tab_24_content,
+input#tab_25 ~ div#tab_25_content,
+input#tab_26 ~ div#tab_26_content,
+input#tab_27 ~ div#tab_27_content,
+input#tab_28 ~ div#tab_28_content,
+input#tab_29 ~ div#tab_29_content,
+input#tab_30 ~ div#tab_30_content,
+input#tab_31 ~ div#tab_31_content,
+input#tab_32 ~ div#tab_32_content,
+input#tab_33 ~ div#tab_33_content,
+input#tab_34 ~ div#tab_34_content,
+input#tab_35 ~ div#tab_35_content,
+input#tab_36 ~ div#tab_36_content,
+input#tab_37 ~ div#tab_37_content,
+input#tab_38 ~ div#tab_38_content,
+input#tab_39 ~ div#tab_39_content,
+input#tab_40 ~ div#tab_40_content,
+input#tab_41 ~ div#tab_41_content,
+input#tab_42 ~ div#tab_42_content,
+input#tab_43 ~ div#tab_43_content,
+input#tab_44 ~ div#tab_44_content,
+input#tab_45 ~ div#tab_45_content,
+input#tab_46 ~ div#tab_46_content,
+input#tab_47 ~ div#tab_47_content,
+input#tab_48 ~ div#tab_48_content,
+input#tab_49 ~ div#tab_49_content,
+input#tab_50 ~ div#tab_50_content,
+input#tab_51 ~ div#tab_51_content,
+input#tab_52 ~ div#tab_52_content,
+input#tab_53 ~ div#tab_53_content,
+input#tab_54 ~ div#tab_54_content,
+input#tab_55 ~ div#tab_55_content,
+input#tab_56 ~ div#tab_56_content,
+input#tab_57 ~ div#tab_57_content,
+input#tab_58 ~ div#tab_58_content,
+input#tab_59 ~ div#tab_59_content,
+input#tab_60 ~ div#tab_60_content,
+input#tab_61 ~ div#tab_61_content,
+input#tab_62 ~ div#tab_62_content,
+input#tab_63 ~ div#tab_63_content,
+input#tab_64 ~ div#tab_64_content,
+input#tab_65 ~ div#tab_65_content,
+input#tab_66 ~ div#tab_66_content,
+input#tab_67 ~ div#tab_67_content,
+input#tab_68 ~ div#tab_68_content,
+input#tab_69 ~ div#tab_69_content,
+input#tab_70 ~ div#tab_70_content,
+input#tab_71 ~ div#tab_71_content,
+input#tab_72 ~ div#tab_72_content,
+input#tab_73 ~ div#tab_73_content,
+input#tab_74 ~ div#tab_74_content,
+input#tab_75 ~ div#tab_75_content,
+input#tab_76 ~ div#tab_76_content,
+input#tab_77 ~ div#tab_77_content,
+input#tab_78 ~ div#tab_78_content,
+input#tab_79 ~ div#tab_79_content,
+input#tab_80 ~ div#tab_80_content,
+input#tab_81 ~ div#tab_81_content,
+input#tab_82 ~ div#tab_82_content,
+input#tab_83 ~ div#tab_83_content,
+input#tab_84 ~ div#tab_84_content,
+input#tab_85 ~ div#tab_85_content,
+input#tab_86 ~ div#tab_86_content,
+input#tab_87 ~ div#tab_87_content,
+input#tab_88 ~ div#tab_88_content,
+input#tab_89 ~ div#tab_89_content,
+input#tab_90 ~ div#tab_90_content,
+input#tab_91 ~ div#tab_91_content,
+input#tab_92 ~ div#tab_92_content,
+input#tab_93 ~ div#tab_93_content,
+input#tab_94 ~ div#tab_94_content,
+input#tab_95 ~ div#tab_95_content,
+input#tab_96 ~ div#tab_96_content,
+input#tab_97 ~ div#tab_97_content,
+input#tab_98 ~ div#tab_98_content,
+input#tab_99 ~ div#tab_99_content,
+input#tab_100 ~ div#tab_100_content {
+    display: none;
+    transition: ease-in-out 0.3s;
+    border-radius: 10px;
+}
+
+input#tab_1:checked ~ div#tab_1_content,
+input#tab_2:checked ~ div#tab_2_content,
+input#tab_3:checked ~ div#tab_3_content,
+input#tab_4:checked ~ div#tab_4_content,
+input#tab_5:checked ~ div#tab_5_content,
+input#tab_6:checked ~ div#tab_6_content,
+input#tab_7:checked ~ div#tab_7_content,
+input#tab_8:checked ~ div#tab_8_content,
+input#tab_9:checked ~ div#tab_9_content,
+input#tab_10:checked ~ div#tab_10_content,
+input#tab_11:checked ~ div#tab_11_content,
+input#tab_12:checked ~ div#tab_12_content,
+input#tab_13:checked ~ div#tab_13_content,
+input#tab_14:checked ~ div#tab_14_content,
+input#tab_15:checked ~ div#tab_15_content,
+input#tab_16:checked ~ div#tab_16_content,
+input#tab_17:checked ~ div#tab_17_content,
+input#tab_18:checked ~ div#tab_18_content,
+input#tab_19:checked ~ div#tab_19_content,
+input#tab_20:checked ~ div#tab_20_content,
+input#tab_21:checked ~ div#tab_21_content,
+input#tab_22:checked ~ div#tab_22_content,
+input#tab_23:checked ~ div#tab_23_content,
+input#tab_24:checked ~ div#tab_24_content,
+input#tab_25:checked ~ div#tab_25_content,
+input#tab_26:checked ~ div#tab_26_content,
+input#tab_27:checked ~ div#tab_27_content,
+input#tab_28:checked ~ div#tab_28_content,
+input#tab_29:checked ~ div#tab_29_content,
+input#tab_30:checked ~ div#tab_30_content,
+input#tab_31:checked ~ div#tab_31_content,
+input#tab_32:checked ~ div#tab_32_content,
+input#tab_33:checked ~ div#tab_33_content,
+input#tab_34:checked ~ div#tab_34_content,
+input#tab_35:checked ~ div#tab_35_content,
+input#tab_36:checked ~ div#tab_36_content,
+input#tab_37:checked ~ div#tab_37_content,
+input#tab_38:checked ~ div#tab_38_content,
+input#tab_39:checked ~ div#tab_39_content,
+input#tab_40:checked ~ div#tab_40_content,
+input#tab_41:checked ~ div#tab_41_content,
+input#tab_42:checked ~ div#tab_42_content,
+input#tab_43:checked ~ div#tab_43_content,
+input#tab_44:checked ~ div#tab_44_content,
+input#tab_45:checked ~ div#tab_45_content,
+input#tab_46:checked ~ div#tab_46_content,
+input#tab_47:checked ~ div#tab_47_content,
+input#tab_48:checked ~ div#tab_48_content,
+input#tab_49:checked ~ div#tab_49_content,
+input#tab_50:checked ~ div#tab_50_content,
+input#tab_51:checked ~ div#tab_51_content,
+input#tab_52:checked ~ div#tab_52_content,
+input#tab_53:checked ~ div#tab_53_content,
+input#tab_54:checked ~ div#tab_54_content,
+input#tab_55:checked ~ div#tab_55_content,
+input#tab_56:checked ~ div#tab_56_content,
+input#tab_57:checked ~ div#tab_57_content,
+input#tab_58:checked ~ div#tab_58_content,
+input#tab_59:checked ~ div#tab_59_content,
+input#tab_60:checked ~ div#tab_60_content,
+input#tab_61:checked ~ div#tab_61_content,
+input#tab_62:checked ~ div#tab_62_content,
+input#tab_63:checked ~ div#tab_63_content,
+input#tab_64:checked ~ div#tab_64_content,
+input#tab_65:checked ~ div#tab_65_content,
+input#tab_66:checked ~ div#tab_66_content,
+input#tab_67:checked ~ div#tab_67_content,
+input#tab_68:checked ~ div#tab_68_content,
+input#tab_69:checked ~ div#tab_69_content,
+input#tab_70:checked ~ div#tab_70_content,
+input#tab_71:checked ~ div#tab_71_content,
+input#tab_72:checked ~ div#tab_72_content,
+input#tab_73:checked ~ div#tab_73_content,
+input#tab_74:checked ~ div#tab_74_content,
+input#tab_75:checked ~ div#tab_75_content,
+input#tab_76:checked ~ div#tab_76_content,
+input#tab_77:checked ~ div#tab_77_content,
+input#tab_78:checked ~ div#tab_78_content,
+input#tab_79:checked ~ div#tab_79_content,
+input#tab_80:checked ~ div#tab_80_content,
+input#tab_81:checked ~ div#tab_81_content,
+input#tab_82:checked ~ div#tab_82_content,
+input#tab_83:checked ~ div#tab_83_content,
+input#tab_84:checked ~ div#tab_84_content,
+input#tab_85:checked ~ div#tab_85_content,
+input#tab_86:checked ~ div#tab_86_content,
+input#tab_87:checked ~ div#tab_87_content,
+input#tab_88:checked ~ div#tab_88_content,
+input#tab_89:checked ~ div#tab_89_content,
+input#tab_90:checked ~ div#tab_90_content,
+input#tab_91:checked ~ div#tab_91_content,
+input#tab_92:checked ~ div#tab_92_content,
+input#tab_93:checked ~ div#tab_93_content,
+input#tab_94:checked ~ div#tab_94_content,
+input#tab_95:checked ~ div#tab_95_content,
+input#tab_96:checked ~ div#tab_96_content,
+input#tab_97:checked ~ div#tab_97_content,
+input#tab_98:checked ~ div#tab_98_content,
+input#tab_99:checked ~ div#tab_99_content,
+input#tab_100:checked ~ div#tab_100_content {
+    display: flex;
+    transition: ease-in-out 0.3s;
+    flex-direction: column;
+    padding-left: 10px;
+    border-radius: 0 0 10px 10px;
+    border: 1px solid rgba(14, 99, 174, 0.3);
+}
+
+div#tab_1_content p {
+    margin: 10px 0;
+}
+
+div#tab_1_content p:first-child {
+    margin-top: 30px;
+}

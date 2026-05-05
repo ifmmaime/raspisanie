@@ -1,0 +1,16 @@
+$(document).ready(function(){
+    let text = window.location.href;// Берем ссылку
+    let regex = /#(\w+)/gi;
+    match = regex.exec(text);// Находим в ней все, что находится после знака #
+    if(match)// Если нашел
+    {
+        // console.log('bzbzbbzbzbzbzb')
+        let details = document.getElementById(match[1]);
+        console.log(match)
+        details.setAttribute('open','open');
+        // $('.container_bak_maga').removeAttribute('open');
+        // Удаляем все активные табы
+        // $('#'+match[1]).attr('open','open');
+        // Добавляем класс 'in active' к ид у которого название с ссылки совпадает с ид у таба
+    }
+});

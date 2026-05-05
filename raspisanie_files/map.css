@@ -1,0 +1,140 @@
+body{
+    font-family: 'Montserrat', sans-serif;
+}
+
+.container_map{
+    margin-top: 40px;
+    position: relative;
+}
+
+.container_map svg.map {
+    fill: #ffffff;
+    stroke: rgba(0, 0, 0, 0.25);
+    stroke-width: 1;
+    transition: fill 0.2s;
+    position: relative;
+}
+
+.container_map svg .modal_open {
+    fill: rgba(0, 108, 183, 0.3);
+}
+
+.container_map svg .modal_open:hover {
+    fill: rgba(0, 108, 183, 0.8);
+}
+
+.container_map svg [data-code]:hover {
+    fill: rgba(0, 108, 183, 0.8);
+}
+
+main .container_map .district {
+    position: absolute;
+    font-weight: normal;
+}
+
+.container .modal_regions {
+    display: none;
+}
+
+.map .modal_open,
+.modal_header_regions svg{
+    cursor: pointer;
+}
+
+.container .modal_regions.active {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 40px 40px;
+    border-radius: 15px;
+    background: #FFFFFF;
+    border: 1px solid #0E63AE;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%,0);
+}
+
+.container .modal_regions .modal_header_regions {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.container .modal_regions .modal_body_regions div,
+.container .nominations {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.container .nominations div{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.container .nominations div svg{
+    margin-right: 10px;
+}
+
+.container .modal_regions .modal_body_regions div a,
+.container .modal_regions .modal_body_regions div p {
+    padding: 5px 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    text-decoration: none;
+}
+
+.container .modal_regions .modal_body_regions div a.last{
+    margin-bottom: 0;
+}
+
+.container .modal_regions .modal_body_regions div a.blue,
+.container .modal_regions .modal_body_regions div p.blue {
+    background: rgba(0, 108, 183, 0.2);
+}
+
+.container .modal_regions .modal_body_regions div a.yellow {
+    background: rgba(255,222,3,0.2);
+}
+
+.container .modal_regions .modal_body_regions div a.orange {
+    background: rgba(255,144,0,0.2);
+}
+
+.container .modal_regions .modal_body_regions div a.green,
+.container .modal_regions .modal_body_regions div p.green {
+    background: rgba(54,255,0,0.2);
+    color: #005183;
+    transition: ease-in-out 0.5s;
+}
+
+.container .modal_regions .modal_body_regions div a.green:hover {
+    background: rgba(54,255,0,0.25);
+    transform: translateY(-3px);
+    transition: ease-in-out 0.5s;
+    box-shadow: 0 10px 10px rgba(25, 120, 0, 0.2);
+    text-decoration: none;
+}
+
+.container .nominations p{
+    font-size: 12px;
+    margin-bottom: 0;
+}
+
+.container .modal_regions .modal_body_regions div a:hover {
+    text-decoration: none;
+}
+
+.container .modal_regions svg {
+    width: 20px;
+    stroke: none;
+}
+
+.container .modal_regions h4 {
+    margin: 0;
+}

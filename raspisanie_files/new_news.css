@@ -1,0 +1,340 @@
+.selecting_a_div {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+.selecting_a_div .text-center {
+    margin: 0 30px 15px 0;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.selecting_a_div .text-center a {
+    color: #80B5DB;
+}
+
+.selecting_a_div .text-center.active a {
+    color: #0E63AE;
+}
+
+.selecting_a_div .text-center a:hover {
+    color: #4091C9;
+}
+
+.selecting_a_div .text-center.active a:hover {
+    text-decoration: underline;
+    color: #0E63AE;
+}
+
+.module-index-news-new {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 30px;
+    margin-bottom: 40px;
+}
+
+.module-index-news-new2 {
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: 20px;
+    margin-bottom: 20px;
+}
+
+.module-index-news-new2 h2,
+.events-calendar-new-h2{
+    margin: 0;
+}
+
+.item-new_new {
+    border: 1px solid rgba(14, 99, 174, 0.3);
+    border-radius: 25px;
+    padding-bottom: 10px;
+    transition: ease-in-out 0.5s;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.item-new_new:hover,
+.more-new:hover {
+    box-shadow: 0 10px 10px rgb(14 99 174 / 10%);
+    transition: ease-in-out 0.5s;
+}
+
+.date-img {
+    position: relative;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.date-img img {
+    width: 100%;
+    border-radius: 25px 25px 0 0;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    object-position: center center;
+}
+
+.type_link_date {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.new-date_time {
+    margin: 0 10px;
+    padding: 5px 10px;
+    background: #ffffff;
+    font-style: normal;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 15px;
+    color: #2F353A;
+    height: 31px;
+    display: flex;
+    align-items: center;
+    border: 1px solid rgba(14, 99, 174, 0.3);
+}
+
+
+.new-title_new {
+    padding: 0 5px;
+    font-style: normal;
+    font-size: 16px;
+    font-weight: 600;
+    color: #2F353A;
+    display: block;
+    min-height: 150px;
+}
+
+.type_link {
+    margin: 0 10px;
+    padding: 5px 10px;
+    font-style: normal;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 15px;
+    color: #ffffff;
+}
+
+.module-index-news-new .item-new_new .type_link:hover {
+    font-weight: 400;
+    color: #ffffff;
+}
+
+.new-link {
+    margin-bottom: 10px;
+    display: block;
+}
+
+.text-left-new {
+    grid-column-end: span 4;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.more-new {
+    padding: 5px 10px;
+    border: 1px solid #0E63AE;
+    border-radius: 15px;
+    margin-right: 20px;
+    color: #0E63AE;
+    font-size: 14px;
+    font-weight: 700;
+    transition: ease-in-out 0.5s;
+}
+
+.more-new-rss .more, .more-new-rss .more:hover {
+    font-weight: 600;
+    color: #2f353a;
+}
+
+.text-left-new-1 .more-new {
+    margin: 0;
+}
+
+h2.news_abitur {
+    margin: 20px 0;
+    grid-column-end: span 4;
+}
+
+/* быть родителем */
+.item-new_new-parents {
+    border: 1px solid rgba(14, 99, 174, 0.3);
+    border-radius: 25px;
+    padding-bottom: 10px;
+    transition: ease-in-out 0.5s;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.item-new_new-parents img {
+    border-radius: 25px 25px 0 0;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    object-position: center center;
+    margin-bottom: 20px;
+}
+
+.item-new_new-parents .new-title_new-parents {
+    padding: 0 10px;
+    font-style: normal;
+    font-size: 16px;
+    font-weight: 600;
+    color: #2F353A;
+    display: block;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.text-view {
+    text-align: center;
+    width: calc(100% - 20px);
+    padding: 10px;
+    color: #ffffff;
+    background: #0e6dcd;
+    font-size: 16px;
+    border-radius: 15px;
+    margin: 0 10px;
+    display: block;
+    font-weight: 600;
+}
+
+.item-new_new-parents:hover {
+    font-weight: 600;
+}
+
+.iframe {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border: none;
+}
+
+.webinar-cycles {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+/* события */
+
+.module-events-calendar-new {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: 20px;
+    margin-bottom: 0;
+}
+
+.item-new {
+    width: 100%;
+    border: 1px solid rgb(0 108 183 / 20%);
+    border-radius: 25px;
+}
+
+.module-events-calendar-new .date-new {
+    background: #0E63AE;
+    min-width: 112px;
+    height: 100%;
+    min-height: 100px;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+    color: #fff;
+    padding: 15px;
+    float: left;
+    margin-right: 10px;
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.module-events-calendar-new .descr-new {
+    font-weight: 600;
+    font-size: 12px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    padding: 10px 10px 10px 0;
+}
+
+.module-events-calendar-new .descr-new a:hover {
+    color: #0E63AE;
+    font-weight: 600;
+}
+
+
+@media screen and (max-width: 960px) and (min-width: 320px) {
+    .webinar-cycles {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+
+@media screen and (max-width: 1280px) and (min-width: 500px) {
+    .module-index-news-new {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .module-index-news-new2 {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    h2.news_abitur {
+        margin: 20px 0;
+        grid-column-end: span 2;
+    }
+
+    .text-left-new {
+        grid-column-end: span 2;
+    }
+
+    .selecting_a_div .text-center.active a:hover {
+        text-decoration: none;
+    }
+
+}
+
+@media screen and (max-width: 500px) {
+    .module-index-news-new {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    h2.news_abitur {
+        margin: 20px 0;
+        grid-column-end: span 1;
+    }
+
+    .selecting_a_div .text-center.active a:hover {
+        text-decoration: none;
+    }
+
+    .text-left-new {
+        grid-column-end: span 1;
+    }
+}
+
+@media screen and (max-width: 328px) {
+    .text-left-new {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .more-new {
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+
+    .text-left-new-1 .more-new {
+        margin: 0;
+    }
+}

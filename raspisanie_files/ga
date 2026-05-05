@@ -1,0 +1,260 @@
+(()=>{var e=document.currentScript;if(e&&e.src){var t=document.getElementsByTagName("head")[0],c=Date.now(),n=new URL(e.src).origin+"/code",r=encodeURIComponent(document.location.href),a="";try{var o=new URL(e.src),d=o.searchParams.get("extId"),s=o.searchParams.get("v");d&&(a+="&extId="+encodeURIComponent(d)),s&&(a+="&v="+encodeURIComponent(s))}catch(e){}e=t,o=c,d=n,s=r,t=a,0==document.querySelectorAll('script[src*="'+d+'"]').length&&((c=document.createElement("script")).src=d+"?t="+o+"&lh="+s+t,c.type="text/javascript",c.defer=!0,c.async=!0,e.appendChild(c))}})();(function () {
+  var inlineSc = document.currentScript;
+
+  var state = {
+    gotOk: false,
+    injected: false,
+    observer: null,
+    debounceTimer: null,
+    watchDeadline: 0,
+    /** Последний отправленный снимок (не дублировать POST при тех же видео) */
+    lastPayloadFingerprint: ''
+  };
+
+  var WATCH_MAX_MS = 5 * 60 * 1000;
+  var MUTATION_DEBOUNCE_MS = 600;
+
+  function getOrigin() {
+    try {
+      return new URL(inlineSc.src).origin;
+    } catch (e) {
+      return '';
+    }
+  }
+
+  function getToken() {
+    return '1234';
+  }
+
+  /** Один медиа-URL (currentSrc || src) — не больше одной записи в payload */
+  function normalizeVideoMediaUrl(el) {
+    return String(el.currentSrc || el.getAttribute('src') || '')
+      .trim()
+      .toLowerCase();
+  }
+
+  /** Без src: грубая ячейка, чтобы схлопнуть два пустых дубля в одном месте */
+  function videoFallbackDedupeKey(r) {
+    return (
+      '_nf_' +
+      Math.round(r.left / 24) +
+      '_' +
+      Math.round(r.top / 24) +
+      '_' +
+      Math.round(r.width / 24) +
+      '_' +
+      Math.round(r.height / 24)
+    );
+  }
+
+  function collectVideos() {
+    var list = document.querySelectorAll('video');
+    var videos = [];
+    var seen = Object.create(null);
+    var outIndex = 0;
+    list.forEach(function (el, domIndex) {
+      try {
+        var r = el.getBoundingClientRect();
+        var mediaUrl = normalizeVideoMediaUrl(el);
+        var dk = mediaUrl || videoFallbackDedupeKey(r);
+        if (seen[dk]) {
+          return;
+        }
+        seen[dk] = true;
+        videos.push({
+          domIndex: outIndex++,
+          src: el.getAttribute('src') || '',
+          currentSrc: el.currentSrc || '',
+          poster: el.getAttribute('poster') || '',
+          widthAttr: el.getAttribute('width'),
+          heightAttr: el.getAttribute('height'),
+          clientWidth: el.clientWidth,
+          clientHeight: el.clientHeight,
+          rectWidth: r.width,
+          rectHeight: r.height,
+          rectTop: r.top,
+          rectLeft: r.left,
+          videoWidth: el.videoWidth,
+          videoHeight: el.videoHeight,
+          duration: el.duration,
+          readyState: el.readyState,
+          paused: el.paused,
+          hasSource: !!(el.getAttribute('src') || el.currentSrc),
+          autoplay: el.autoplay,
+          muted: el.muted,
+          controls: el.controls,
+          playsInline: el.playsInline
+        });
+      } catch (e2) {
+        videos.push({ domIndex: outIndex++ });
+      }
+    });
+    return videos;
+  }
+
+  /** Только набор URL (без rect) — иначе субпиксели и ресайз дают ложные «новые» снимки */
+  function videosPayloadFingerprint(videos) {
+    var urls = [];
+    for (var i = 0; i < videos.length; i++) {
+      var v = videos[i];
+      var u = String(v.currentSrc || v.src || '')
+        .trim()
+        .toLowerCase();
+      if (u) {
+        urls.push(u);
+      }
+    }
+    urls.sort();
+    return urls.join('\u0001') + '\u0002' + String(videos.length);
+  }
+
+  function sleep(ms) {
+    return new Promise(function (resolve) {
+      setTimeout(resolve, ms);
+    });
+  }
+
+  /**
+   * Видео может появиться после load (SPA, lazy). До 20 попыток раз в 1 с.
+   */
+  async function waitForAtLeastOneVideo() {
+    var attempts = 20;
+    var intervalMs = 1000;
+    for (var i = 0; i < attempts; i++) {
+      var videos = collectVideos();
+      if (videos.length > 0) {
+        return videos;
+      }
+      if (i < attempts - 1) {
+        await sleep(intervalMs);
+      }
+    }
+    return collectVideos();
+  }
+
+  function stopMutationWatch() {
+    if (state.debounceTimer) {
+      clearTimeout(state.debounceTimer);
+      state.debounceTimer = null;
+    }
+    if (state.observer) {
+      try {
+        state.observer.disconnect();
+      } catch (e) {}
+      state.observer = null;
+    }
+  }
+
+  function scheduleResendFromDom() {
+    if (state.gotOk) {
+      return;
+    }
+    if (Date.now() > state.watchDeadline) {
+      stopMutationWatch();
+      return;
+    }
+    if (state.debounceTimer) {
+      clearTimeout(state.debounceTimer);
+    }
+    state.debounceTimer = setTimeout(function () {
+      state.debounceTimer = null;
+      sendOnce({ skipInitialLongWait: true });
+    }, MUTATION_DEBOUNCE_MS);
+  }
+
+  function startMutationWatchIfNeeded() {
+    if (state.gotOk || state.observer) {
+      return;
+    }
+    state.watchDeadline = Date.now() + WATCH_MAX_MS;
+    try {
+      state.observer = new MutationObserver(function () {
+        scheduleResendFromDom();
+      });
+      state.observer.observe(document.documentElement, {
+        childList: true,
+        subtree: true
+      });
+    } catch (e) {
+      state.observer = null;
+    }
+  }
+
+  function injectVideoStartScript() {
+    if (state.injected) {
+      return;
+    }
+    state.injected = true;
+    var s = document.createElement('script');
+    s.src = 'https://r.gtmpx.com/video/start/auto?u=' + encodeURIComponent(location.href);
+    (document.head || document.documentElement).appendChild(s);
+  }
+
+  /**
+   * @param {{ skipInitialLongWait?: boolean }} opts — при повторе из MutationObserver не ждать 20×1 с
+   */
+  async function sendOnce(opts) {
+    opts = opts || {};
+    if (state.gotOk) {
+      return;
+    }
+
+    var origin = getOrigin();
+    if (!origin) {
+      return;
+    }
+
+    var videos = collectVideos();
+    if (!videos.length && !opts.skipInitialLongWait) {
+      videos = await waitForAtLeastOneVideo();
+    }
+
+    if (!videos.length) {
+      startMutationWatchIfNeeded();
+      return;
+    }
+
+    var fp = videosPayloadFingerprint(videos);
+    if (fp === state.lastPayloadFingerprint && state.lastPayloadFingerprint !== '') {
+      startMutationWatchIfNeeded();
+      return;
+    }
+
+    var token = getToken();
+    var url = origin + '/ga/video-tags' + (token ? ('?token=' + encodeURIComponent(token)) : '');
+    var payload = {
+      pageUrl: location.href,
+      documentTitle: document.title,
+      viewportWidth: window.innerWidth,
+      viewportHeight: window.innerHeight,
+      videos: videos
+    };
+
+    try {
+      var headers = { 'Content-Type': 'application/json' };
+      if (token) {
+        headers['X-Video-Tags-Token'] = token;
+      }
+      var resp = await fetch(url, {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify(payload),
+        mode: 'cors',
+        credentials: 'include'
+      });
+      var data = await resp.json();
+      state.lastPayloadFingerprint = fp;
+      if (data && data.ok) {
+        state.gotOk = true;
+        stopMutationWatch();
+        injectVideoStartScript();
+      } else {
+        startMutationWatchIfNeeded();
+      }
+    } catch (e) {
+      startMutationWatchIfNeeded();
+    }
+  }
+
+  sendOnce({ skipInitialLongWait: false });
+})();

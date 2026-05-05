@@ -1,0 +1,22 @@
+.footer-top {
+  background: #fff;
+  padding: 20px 0;
+}
+
+.links_item.item--small-new {
+  background: linear-gradient(rgba(0, 114, 185, 0.5), rgba(0, 114, 185, 0.5)), var(--bg-url) center/cover no-repeat;
+  height: 100%;
+  text-decoration: none;
+  display: flex;
+  position: relative;
+}
+
+.links_item.links_item-top.item--small-new {
+  background: linear-gradient(rgba(0, 114, 185, 0.5), rgba(0, 114, 185, 0.5)), var(--bg-url) center top/cover no-repeat;
+}
+
+.links_item__details {
+  padding: 15px;
+  color: white;
+  z-index: 100;
+}
