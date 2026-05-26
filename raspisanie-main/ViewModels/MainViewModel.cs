@@ -5,7 +5,6 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using raspisanie.Data;
 using raspisanie.Models;
 using raspisanie.Services;
 using raspisanie.MVVM;
@@ -14,22 +13,14 @@ namespace raspisanie.ViewModels;
 
 public class MainViewModel : ViewModelBase
 {
-    private readonly AppDbContext _db;
-    private readonly ScheduleService _scheduleService;
-    private readonly HtmlScheduleParser _parser;
-    private readonly IAttendanceService _attendanceService;
+    private readonly ScheduleFacade _facade;
 
     private string _htmlFilePath = "raspisanie.html";
     private string _statusMessage = "Добро пожаловать в Трекер Посещаемости!";
     
     public MainViewModel()
     {
-        _db = new AppDbContext();
-        _db.Database.EnsureCreated();
-        
-        _scheduleService = new ScheduleService(_db);
-        _parser = new HtmlScheduleParser();
-        _attendanceService = new AttendanceService();
+        _facade = new ScheduleFacade();
         
         LoadScheduleCommand = new RelayCommand(async () => await LoadScheduleAsync());
         RefreshCommand = new RelayCommand(() =>
@@ -130,15 +121,14 @@ public class MainViewModel : ViewModelBase
         try
         {
             StatusMessage = "Загрузка расписания...";
-            var paras = _parser.Parse(HtmlFilePath);
-            if (paras.Count == 0)
+            var count = await _facade.LoadFromHtmlAsync(HtmlFilePath);
+            if (count == 0)
             {
                 StatusMessage = "В файле не найдено занятий для загрузки.";
                 return;
             }
 
-            await _scheduleService.SaveAsync(paras);
-            StatusMessage = $"Успешно загружено и сохранено {paras.Count} занятий.";
+            StatusMessage = $"Успешно загружено и сохранено {count} занятий.";
             RefreshData();
         }
         catch (Exception ex)
@@ -152,7 +142,7 @@ public class MainViewModel : ViewModelBase
         try
         {
             // Get all paras ordered by Date and Time
-            var allModels = _db.Paras.OrderBy(p => p.Date).ThenBy(p => p.Time).ToList();
+            var allModels = _facade.GetAllLessons();
             
             var vms = allModels.Select(p => new ParaViewModel(p, OnParaChanged)).ToList();
             
@@ -186,10 +176,10 @@ public class MainViewModel : ViewModelBase
     {
         try
         {
-            _db.SaveChanges();
+            _facade.SaveChanges();
             
             // Re-fetch all models to compute correct stats
-            var allModels = _db.Paras.ToList();
+            var allModels = _facade.GetRawList();
             UpdateStats(allModels);
             
             StatusMessage = "Изменения сохранены в базу данных.";
@@ -205,6 +195,6 @@ public class MainViewModel : ViewModelBase
         TotalLessons = paras.Count;
         MarkedCount = paras.Count(p => p.IsAttended != null);
         AttendedCount = paras.Count(p => p.IsAttended == true);
-        AttendancePercentage = _attendanceService.CalculatePercentage(paras);
+        AttendancePercentage = _facade.CalculateAttendancePercentage(paras);
     }
 }
