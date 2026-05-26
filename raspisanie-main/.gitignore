@@ -1,0 +1,28 @@
+# .NET
+[Bb]in/
+[Oo]bj/
+[Tt]emp/
+*.swp
+*.lock
+.DS_Store
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Visual Studio Code
+.vscode/
+
+# Database
+raspisanie.db
+raspisanie.db-shm
+raspisanie.db-wal
+
+# Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
