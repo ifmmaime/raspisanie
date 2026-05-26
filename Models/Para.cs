@@ -10,5 +10,5 @@ public class Para // пара в виде класса (далее в коде �
     public string Teacher { get; set; } = string.Empty; 
     public string Room { get; set; } = string.Empty;    
 
-    public bool? IsAttended { get; set; }               // null = не отмечено, true = был, false = не был 123sa321
+    public bool? IsAttended { get; set; }               // null = не отмечено, true = был, false = не был
 }
