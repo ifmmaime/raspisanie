@@ -1,0 +1,261 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:raspisanie.ViewModels"
+        x:Class="raspisanie.MainWindow"
+        x:DataType="vm:MainViewModel"
+        Title="Трекер посещаемости"
+        Width="900" Height="650"
+        WindowStartupLocation="CenterScreen"
+        Background="#121214"
+        Foreground="#E1E1E6">
+
+    <Window.Styles>
+        <!-- Card Style -->
+        <Style Selector="Border.lesson-card">
+            <Setter Property="Background" Value="#1E1E22" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="BorderBrush" Value="#2D2D35" />
+            <Setter Property="CornerRadius" Value="8" />
+            <Setter Property="Padding" Value="16" />
+            <Setter Property="Margin" Value="0,0,0,12" />
+        </Style>
+        
+        <!-- Button styles -->
+        <Style Selector="Button.choice-btn">
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="BorderBrush" Value="#3F3F4C" />
+            <Setter Property="Padding" Value="14,6" />
+            <Setter Property="FontSize" Value="13" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="CornerRadius" Value="6" />
+        </Style>
+        
+        <!-- Reset button specific style -->
+        <Style Selector="Button.choice-btn.reset">
+            <Setter Property="Background" Value="#3E3E4A" />
+            <Setter Property="BorderBrush" Value="#555566" />
+            <Setter Property="Foreground" Value="#AAAAAA" />
+        </Style>
+        <Style Selector="Button.choice-btn.reset:hover">
+            <Setter Property="Background" Value="#4E4E5C" />
+            <Setter Property="Foreground" Value="White" />
+        </Style>
+    </Window.Styles>
+
+    <Grid RowDefinitions="Auto,Auto,*,Auto">
+        <!-- Header -->
+        <Border Grid.Row="0" Background="#1A1A1E" Padding="15,12" BorderThickness="0,0,0,1" BorderBrush="#2D2D35">
+            <Grid ColumnDefinitions="*,Auto">
+                <StackPanel Orientation="Horizontal" Spacing="10">
+                    <TextBlock Text="📅" FontSize="24" VerticalAlignment="Center" />
+                    <TextBlock Text="Трекер посещаемости занятий" FontSize="20" FontWeight="Bold" Foreground="#FFFFFF" VerticalAlignment="Center" />
+                </StackPanel>
+                <TextBlock Grid.Column="1" Text="Avalonia MVVM" Foreground="#7F56D9" FontWeight="SemiBold" VerticalAlignment="Center" />
+            </Grid>
+        </Border>
+
+        <!-- Import Panel -->
+        <Border Grid.Row="1" Background="#1E1E24" Margin="15,15,15,10" Padding="15" CornerRadius="8" BorderThickness="1" BorderBrush="#2D2D35">
+            <Grid ColumnDefinitions="*,Auto,Auto">
+                <StackPanel Spacing="5" Margin="0,0,15,0">
+                    <TextBlock Text="Импорт расписания из HTML-файла" FontSize="12" Foreground="#888888" FontWeight="SemiBold" />
+                    <TextBox Text="{Binding HtmlFilePath, Mode=TwoWay}" Watermark="Введите путь к файлу (например, raspisanie.html)" Height="36" VerticalContentAlignment="Center" Background="#16161A" BorderBrush="#383842" Foreground="White" CornerRadius="6" />
+                </StackPanel>
+                <Button Grid.Column="1" Content="Загрузить расписание" Command="{Binding LoadScheduleCommand}" Height="36" Padding="20,0" Background="#7F56D9" Foreground="White" FontWeight="Bold" CornerRadius="6" VerticalAlignment="Bottom" Margin="0,0,10,0" />
+                <Button Grid.Column="2" Content="🔄 Обновить" Command="{Binding RefreshCommand}" Height="36" Padding="15,0" Background="#2C2C35" BorderBrush="#3E3E4A" BorderThickness="1" Foreground="White" CornerRadius="6" VerticalAlignment="Bottom" />
+            </Grid>
+        </Border>
+
+        <!-- Main Workspace -->
+        <TabControl Grid.Row="2" Margin="15,5,15,15">
+            <!-- TODAY TAB -->
+            <TabItem Header="Сегодня" FontSize="15" FontWeight="SemiBold">
+                <Grid Margin="0,15,0,0">
+                    <!-- If today's lessons exist -->
+                    <ScrollViewer IsVisible="{Binding HasTodayParas}">
+                        <ItemsControl ItemsSource="{Binding TodayParas}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate x:DataType="vm:ParaViewModel">
+                                    <Border Classes="lesson-card">
+                                        <Grid ColumnDefinitions="*,Auto">
+                                            <!-- Info -->
+                                            <StackPanel Spacing="8">
+                                                <StackPanel Orientation="Horizontal" Spacing="10">
+                                                    <Border Background="#2C2C3E" Padding="6,2" CornerRadius="4">
+                                                        <TextBlock Text="{Binding Time}" FontSize="13" FontWeight="Bold" Foreground="#A9A9B2" />
+                                                    </Border>
+                                                    <Border Background="{Binding StatusColor}" Padding="8,2" CornerRadius="4">
+                                                        <TextBlock Text="{Binding StatusText}" FontSize="12" FontWeight="Bold" Foreground="White" />
+                                                    </Border>
+                                                </StackPanel>
+                                                
+                                                <TextBlock Text="{Binding Subject}" FontSize="16" FontWeight="Bold" Foreground="White" TextWrapping="Wrap" />
+                                                
+                                                <StackPanel Orientation="Horizontal" Spacing="15">
+                                                    <StackPanel Orientation="Horizontal" Spacing="4">
+                                                        <TextBlock Text="👤" Foreground="#888888" />
+                                                        <TextBlock Text="{Binding Teacher}" FontSize="13" Foreground="#CCCCCC" />
+                                                    </StackPanel>
+                                                    <StackPanel Orientation="Horizontal" Spacing="4">
+                                                        <TextBlock Text="🚪" Foreground="#888888" />
+                                                        <TextBlock Text="{Binding Room, StringFormat='ауд. {0}'}" FontSize="13" Foreground="#CCCCCC" />
+                                                    </StackPanel>
+                                                </StackPanel>
+                                            </StackPanel>
+                                            
+                                            <!-- Actions -->
+                                            <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" Spacing="8">
+                                                <Button Content="Был" 
+                                                        Command="{Binding SetAttendedCommand}" 
+                                                        Background="{Binding AttendedColor}"
+                                                        Classes="choice-btn" />
+                                                <Button Content="Не был" 
+                                                        Command="{Binding SetAbsentCommand}" 
+                                                        Background="{Binding AbsentColor}"
+                                                        Classes="choice-btn" />
+                                                <Button Content="Сбросить" 
+                                                        Command="{Binding SetUnmarkedCommand}" 
+                                                        Classes="choice-btn reset"
+                                                        IsVisible="{Binding CanReset}" />
+                                            </StackPanel>
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
+                    
+                    <!-- Fallback message if empty -->
+                    <Border IsVisible="{Binding NoTodayParas}" Background="#1E1E22" CornerRadius="8" Padding="30" BorderThickness="1" BorderBrush="#2D2D35" VerticalAlignment="Top">
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="15">
+                            <TextBlock Text="📅" FontSize="48" HorizontalAlignment="Center" />
+                            <TextBlock Text="На сегодня занятий не запланировано." FontSize="16" FontWeight="Bold" Foreground="#888888" HorizontalAlignment="Center" />
+                            <TextBlock Text="Все прошедшие и будущие занятия доступны во вкладке 'Все занятия'." FontSize="13" Foreground="#666666" HorizontalAlignment="Center" />
+                        </StackPanel>
+                    </Border>
+                </Grid>
+            </TabItem>
+
+            <!-- ALL LESSONS TAB -->
+            <TabItem Header="Все занятия" FontSize="15" FontWeight="SemiBold">
+                <Grid Margin="0,15,0,0">
+                    <ScrollViewer>
+                        <ItemsControl ItemsSource="{Binding AllParas}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate x:DataType="vm:ParaViewModel">
+                                    <Border Classes="lesson-card">
+                                        <Grid ColumnDefinitions="*,Auto">
+                                            <!-- Info -->
+                                            <StackPanel Spacing="8">
+                                                <StackPanel Orientation="Horizontal" Spacing="10">
+                                                    <Border Background="#2C2C3E" Padding="6,2" CornerRadius="4">
+                                                        <TextBlock Text="{Binding Date, StringFormat='dd.MM.yyyy'}" FontSize="13" FontWeight="Bold" Foreground="#A9A9B2" />
+                                                    </Border>
+                                                    <Border Background="#2C2C3E" Padding="6,2" CornerRadius="4">
+                                                        <TextBlock Text="{Binding Time}" FontSize="13" FontWeight="Bold" Foreground="#A9A9B2" />
+                                                    </Border>
+                                                    <Border Background="{Binding StatusColor}" Padding="8,2" CornerRadius="4">
+                                                        <TextBlock Text="{Binding StatusText}" FontSize="12" FontWeight="Bold" Foreground="White" />
+                                                    </Border>
+                                                </StackPanel>
+                                                
+                                                <TextBlock Text="{Binding Subject}" FontSize="16" FontWeight="Bold" Foreground="White" TextWrapping="Wrap" />
+                                                
+                                                <StackPanel Orientation="Horizontal" Spacing="15">
+                                                    <StackPanel Orientation="Horizontal" Spacing="4">
+                                                        <TextBlock Text="👤" Foreground="#888888" />
+                                                        <TextBlock Text="{Binding Teacher}" FontSize="13" Foreground="#CCCCCC" />
+                                                    </StackPanel>
+                                                    <StackPanel Orientation="Horizontal" Spacing="4">
+                                                        <TextBlock Text="🚪" Foreground="#888888" />
+                                                        <TextBlock Text="{Binding Room, StringFormat='ауд. {0}'}" FontSize="13" Foreground="#CCCCCC" />
+                                                    </StackPanel>
+                                                </StackPanel>
+                                            </StackPanel>
+                                            
+                                            <!-- Actions -->
+                                            <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" Spacing="8">
+                                                <Button Content="Был" 
+                                                        Command="{Binding SetAttendedCommand}" 
+                                                        Background="{Binding AttendedColor}"
+                                                        Classes="choice-btn" />
+                                                <Button Content="Не был" 
+                                                        Command="{Binding SetAbsentCommand}" 
+                                                        Background="{Binding AbsentColor}"
+                                                        Classes="choice-btn" />
+                                                <Button Content="Сбросить" 
+                                                        Command="{Binding SetUnmarkedCommand}" 
+                                                        Classes="choice-btn reset"
+                                                        IsVisible="{Binding CanReset}" />
+                                            </StackPanel>
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
+                </Grid>
+            </TabItem>
+
+            <!-- STATS TAB -->
+            <TabItem Header="Статистика" FontSize="15" FontWeight="SemiBold">
+                <Grid Margin="0,20,0,0" RowDefinitions="Auto,*" ColumnDefinitions="*,*">
+                    <!-- Big Percent Card -->
+                    <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Background="#1E1E22" CornerRadius="12" Padding="25" BorderThickness="1" BorderBrush="#2D2D35" Margin="0,0,0,20">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <StackPanel Spacing="10">
+                                <TextBlock Text="Посещаемость" FontSize="16" Foreground="#888888" FontWeight="SemiBold" />
+                                <TextBlock Text="{Binding AttendancePercentageString}" FontSize="48" FontWeight="Bold" Foreground="#4CAF50" />
+                                <ProgressBar Value="{Binding AttendancePercentage}" Maximum="100" Height="8" Background="#2C2C35" Foreground="#4CAF50" CornerRadius="4" />
+                            </StackPanel>
+                            <TextBlock Grid.Column="1" Text="📈" FontSize="56" VerticalAlignment="Center" Margin="20,0,0,0" />
+                        </Grid>
+                    </Border>
+                    
+                    <!-- Stats Details -->
+                    <Border Grid.Row="1" Grid.Column="0" Background="#1E1E22" CornerRadius="12" Padding="20" BorderThickness="1" BorderBrush="#2D2D35" Margin="0,0,10,0">
+                        <StackPanel Spacing="15">
+                            <TextBlock Text="Детали посещаемости" FontSize="16" FontWeight="Bold" Foreground="White" Margin="0,0,0,10" />
+                            
+                            <Grid ColumnDefinitions="*,Auto">
+                                <TextBlock Text="Всего занятий в базе:" Foreground="#AAAAAA" />
+                                <TextBlock Grid.Column="1" Text="{Binding TotalLessons}" FontWeight="Bold" Foreground="White" />
+                            </Grid>
+                            
+                            <Grid ColumnDefinitions="*,Auto">
+                                <TextBlock Text="Отмечено занятий:" Foreground="#AAAAAA" />
+                                <TextBlock Grid.Column="1" Text="{Binding MarkedCount}" FontWeight="Bold" Foreground="White" />
+                            </Grid>
+                            
+                            <Grid ColumnDefinitions="*,Auto">
+                                <TextBlock Text="Из них посещено:" Foreground="#AAAAAA" />
+                                <TextBlock Grid.Column="1" Text="{Binding AttendedCount}" FontWeight="Bold" Foreground="#4CAF50" />
+                            </Grid>
+                            
+                            <Grid ColumnDefinitions="*,Auto">
+                                <TextBlock Text="Из них пропущено:" Foreground="#AAAAAA" />
+                                <TextBlock Grid.Column="1" Text="{Binding AbsentCount}" FontWeight="Bold" Foreground="#F44336" />
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Grid.Row="1" Grid.Column="1" Background="#1E1E22" CornerRadius="12" Padding="20" BorderThickness="1" BorderBrush="#2D2D35" Margin="10,0,0,0">
+                        <StackPanel Spacing="15" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <TextBlock Text="💡 Подсказка" FontSize="16" FontWeight="Bold" Foreground="#7F56D9" />
+                            <TextBlock Text="Нажмите кнопки 'Был' или 'Не был' напротив занятий во вкладках 'Сегодня' или 'Все занятия', чтобы отметить посещение. Результаты сразу обновят статистику и сохранятся в базе данных SQLite." FontSize="13" TextWrapping="Wrap" Foreground="#CCCCCC" />
+                        </StackPanel>
+                    </Border>
+                </Grid>
+            </TabItem>
+        </TabControl>
+
+        <!-- Status Bar -->
+        <Border Grid.Row="3" Background="#151518" Padding="12,8" BorderThickness="0,1,0,0" BorderBrush="#2D2D35">
+            <Grid ColumnDefinitions="*,Auto">
+                <TextBlock Text="{Binding StatusMessage}" FontSize="12" Foreground="#888888" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" />
+                <TextBlock Grid.Column="1" Text="БД: raspisanie.db" FontSize="12" Foreground="#666666" VerticalAlignment="Center" />
+            </Grid>
+        </Border>
+    </Grid>
+</Window>
