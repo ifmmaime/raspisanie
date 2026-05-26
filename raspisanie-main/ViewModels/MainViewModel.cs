@@ -15,13 +15,30 @@ public class MainViewModel : ViewModelBase
 {
     private readonly ScheduleFacade _facade;
 
-    private string _htmlFilePath = "raspisanie.html";
+    public SettingsViewModel Settings { get; }
+
     private string _statusMessage = "Добро пожаловать в Трекер Посещаемости!";
+    private int _selectedTabIndex;
     
     public MainViewModel()
     {
         _facade = new ScheduleFacade();
         
+        // Сначала создаем VM настроек с дефолтными значениями
+        Settings = new SettingsViewModel(new AppSettings());
+
+        // Запускаем асинхронную загрузку настроек из JSON
+        _ = LoadSettingsAsync();
+
+        // Подписываемся на синхронизацию путей к файлам
+        Settings.PropertyChanged += (s, e) =>
+        {
+            if (e.PropertyName == nameof(SettingsViewModel.HtmlFilePath))
+            {
+                OnPropertyChanged(nameof(HtmlFilePath));
+            }
+        };
+
         LoadScheduleCommand = new RelayCommand(async () => await LoadScheduleAsync());
         RefreshCommand = new RelayCommand(() =>
         {
@@ -31,11 +48,45 @@ public class MainViewModel : ViewModelBase
         
         RefreshData();
     }
+
+    private async Task LoadSettingsAsync()
+    {
+        var settingsModel = await SettingsService.Instance.LoadAsync();
+        
+        // Обновляем настройки на UI-потоке
+        Avalonia.Threading.Dispatcher.UIThread.Post(() =>
+        {
+            Settings.UpdateSettings(settingsModel);
+
+            // Устанавливаем вкладку по умолчанию после загрузки настроек
+            SelectedTabIndex = Settings.DefaultTab switch
+            {
+                "Сегодня" => 0,
+                "Все занятия" => 1,
+                "Статистика" => 2,
+                "Настройки" => 3,
+                _ => 0
+            };
+        });
+    }
     
+    public int SelectedTabIndex
+    {
+        get => _selectedTabIndex;
+        set => RaiseAndSetIfChanged(ref _selectedTabIndex, value);
+    }
+
     public string HtmlFilePath
     {
-        get => _htmlFilePath;
-        set => RaiseAndSetIfChanged(ref _htmlFilePath, value);
+        get => Settings.HtmlFilePath;
+        set
+        {
+            if (Settings.HtmlFilePath != value)
+            {
+                Settings.HtmlFilePath = value;
+                OnPropertyChanged();
+            }
+        }
     }
     
     public string StatusMessage
