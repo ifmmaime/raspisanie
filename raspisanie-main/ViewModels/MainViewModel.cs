@@ -39,7 +39,7 @@ public class MainViewModel : ViewModelBase
             }
         };
 
-        LoadScheduleCommand = new RelayCommand(async () => await LoadScheduleAsync());
+        LoadScheduleCommand = new RelayCommand(LoadScheduleAsync);
         RefreshCommand = new RelayCommand(() =>
         {
             RefreshData();
