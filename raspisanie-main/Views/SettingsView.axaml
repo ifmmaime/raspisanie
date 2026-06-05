@@ -1,0 +1,73 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:raspisanie.ViewModels"
+             x:Class="raspisanie.Views.SettingsView"
+             x:DataType="vm:SettingsViewModel">
+
+    <Border Background="#1E1E24"
+            CornerRadius="8"
+            BorderThickness="1"
+            BorderBrush="#2D2D35"
+            Padding="16">
+
+        <StackPanel Spacing="14">
+
+            <!-- Заголовок -->
+            <StackPanel Orientation="Horizontal" Spacing="8">
+                <TextBlock Text="⚙" FontSize="16" VerticalAlignment="Center" Foreground="#7F56D9"/>
+                <TextBlock Text="Настройки" FontSize="15" FontWeight="Bold"
+                           Foreground="#FFFFFF" VerticalAlignment="Center"/>
+            </StackPanel>
+
+            <!-- Путь к файлу расписания -->
+            <StackPanel Spacing="4">
+                <TextBlock Text="Путь к HTML-файлу расписания"
+                           FontSize="11" Foreground="#888888" FontWeight="SemiBold"/>
+                <TextBox Text="{Binding HtmlFilePath, Mode=TwoWay}"
+                         Watermark="Например: raspisanie.html"
+                         Height="34"
+                         VerticalContentAlignment="Center"
+                         Background="#16161A"
+                         BorderBrush="#383842"
+                         Foreground="White"
+                         CornerRadius="6"/>
+            </StackPanel>
+
+            <!-- Вкладка по умолчанию -->
+            <StackPanel Spacing="4">
+                <TextBlock Text="Вкладка по умолчанию"
+                           FontSize="11" Foreground="#888888" FontWeight="SemiBold"/>
+                <ComboBox ItemsSource="{Binding TabOptions}"
+                          SelectedItem="{Binding DefaultTab, Mode=TwoWay}"
+                          Height="34"
+                          Background="#16161A"
+                          BorderBrush="#383842"
+                          Foreground="White"
+                          CornerRadius="6"
+                          HorizontalAlignment="Stretch"/>
+            </StackPanel>
+
+            <!-- Кнопка Undo -->
+            <Button Content="↩ Отменить изменение"
+                    Command="{Binding UndoCommand}"
+                    Height="32"
+                    Padding="14,0"
+                    Background="#2C2C35"
+                    BorderBrush="#3E3E4A"
+                    BorderThickness="1"
+                    Foreground="#AAAAAA"
+                    CornerRadius="6"
+                    FontSize="12"
+                    HorizontalAlignment="Left"/>
+
+            <!-- Статус автосохранения -->
+            <StackPanel Orientation="Horizontal" Spacing="6"
+                        IsVisible="{Binding IsSaving}">
+                <Ellipse Width="8" Height="8" Fill="#7F56D9"/>
+                <TextBlock Text="Автосохранение..." FontSize="11"
+                           Foreground="#888888" VerticalAlignment="Center"/>
+            </StackPanel>
+
+        </StackPanel>
+    </Border>
+</UserControl>
